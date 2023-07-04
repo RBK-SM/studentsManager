@@ -1,7 +1,7 @@
 const db = require("../database");
 
 module.exports = {
-    //method to fetch all posts from the blog database.
+
     getAllTeachers :function (req, res) {
         db.query("SELECT * FROM teachers", (err, items, fields) => {
           if (err) {
