@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS `studentmanager`.`teachers` (
   `idteacher` INT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(45) NOT NULL,
   `email` VARCHAR(50) NOT NULL,
-  `password` VARCHAR(45) NOT NULL,
+  `password` VARCHAR(300) NOT NULL,
   PRIMARY KEY (`idteacher`))
 ENGINE = InnoDB;
 
