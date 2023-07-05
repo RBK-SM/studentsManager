@@ -11,6 +11,15 @@ module.exports = {
           }
         });
       },
+   getOneTeachers :function (req, res) {
+        db.query("SELECT * FROM teachers where name=?",[req.params.name], (err, items, fields) => {
+          if (err) {
+            res.status(500).send(err);
+          } else {
+            res.status(200).send(items);
+          }
+        });
+      },
     insertTeacher: function(req, res) {
         db.query("insert into teachers (name,email,password) values(?,?,?)",[req.body.name,req.body.email,req.body.password], (err, items, fields) => {
             if (err) {
