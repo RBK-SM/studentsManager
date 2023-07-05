@@ -4,6 +4,7 @@ import AddTeahcers from './components/Teachers/AddTeachers.js'
 import axios from 'axios'
 import Teachers from './components/Teachers/Teachers.js'
 import AddGrade from './components/Teachers/Grade/AddGrade.js'
+import Grade from './components/Teachers/Grade/Grade.js'
 
 const App = () => {
   const [datas, setDatas] = useState([])
@@ -25,7 +26,7 @@ axios.get("//URL")
       <AddTeahcers />
       <Teachers data={datas} />
       <AddGrade/>
-      
+      <Grade />
     </div>
   )
 }

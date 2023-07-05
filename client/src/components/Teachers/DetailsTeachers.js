@@ -1,8 +1,8 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const DetailsTeachers = () => {
-  const [newTeachersName, setNewTeachersName] = useState(teachersName);
+const DetailsTeachers = (Name) => {
+  const [newTeachersName, setNewTeachersName] = useState();
   const [newPassword, setNewPassword] = useState("");
   const [newEmail, setNewEmail] = useState("");
   const [view, setView] = useState(false);
@@ -32,49 +32,57 @@ const DetailsTeachers = () => {
     <div className="teacher-detail">
       <div>
         <ul>
-          <li className="detail-name">
-            {newTeachersName}
+          <li className="detail-name">{Name.teacherName}</li>
+          <li>
             {view ? (
               <input
                 type="text"
-                value={newTeachersName}
+                value={Name.teacherName}
                 onChange={(e) => setNewTeachersName(e.target.value)}
               />
             ) : (
-              teacherName
+              Name.teacherName
             )}
           </li>
           <li>
             {view ? (
               <input
                 type="text"
-                value={newEmail}
+                value={Name.email}
                 onChange={(e) => setNewEmail(e.target.value)}
               />
             ) : (
-              email
+              Name.email
             )}
           </li>
           <li>
             {view ? (
               <input
                 type="text"
-                value={newPassword}
+                value={Name.password}
                 onChange={(e) => setNewPassword(e.target.value)}
               />
             ) : (
-              password
+              Name.password
             )}
           </li>
         </ul>
       </div>
-      {editMode ? (
-        <button onClick={updateTeacher}>Update Teacher</button>
+      {view ? (
+        <button
+          onClick={() => {
+            updateTeacher(Name.teacherName.email.password);
+          }}
+        >
+          Update Teacher
+        </button>
       ) : (
         <button onClick={changeView}>Edit Teacher</button>
       )}
 
-      <button onClick={() => deleteTeacher(teacherName)}>Delete Teacher</button>
+      <button onClick={() => deleteTeacher(Name.teacherName)}>
+        Delete Teacher
+      </button>
     </div>
   );
 };
