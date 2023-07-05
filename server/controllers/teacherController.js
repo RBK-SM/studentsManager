@@ -1,7 +1,8 @@
 const db = require("../database");
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken')
-require('dotenv').config();
+const config = require("../config/index.js")
+const SECRET_KEY = config.SECRET_KEY
 
 module.exports = {
   //method to fetch all posts from the blog database.
@@ -14,6 +15,7 @@ module.exports = {
       }
     });
   },
+
   insertTeacher: function (req, res) {
     db.query("insert into teachers (name,email,password) values(?,?,?)", [req.body.name, req.body.email, req.body.password], (err, items, fields) => {
       if (err) {
@@ -67,18 +69,14 @@ module.exports = {
     if (!password || password.length < 6) {
       return res.status(400).send({
         msg: 'Password must be at least 6 characters'
-      });
+      })
     }
 
     // password (repeat) does not match
-    if (
-      !password_repeat ||
-      password != password_repeat
-    ) {
+    if (!password_repeat || password != password_repeat) {
       return res.status(400).send({
         msg: "Password doesn't match"
-      });
-
+      })
     }
 
 
@@ -92,7 +90,7 @@ module.exports = {
       if (result.length !== 0) {
         return res.status(409).send({
           msg: 'This email is already in use!'
-        });
+        })
       }
       // email is available
       bcrypt.hash(password, 8).then((hashed) => {
@@ -152,15 +150,15 @@ module.exports = {
 
       //check password
       bcrypt.compare(password, result[0].password).then(isMatch => {
-
         if (isMatch === false) {
           return res.status(401).send({
-            msg: "email or Password is incorrect "
+            msg: "Invalid credentials"
           })
         }
 
         //generate token
-        const token = jwt.sign({ id: result[0].idteacher.toString() }, process.env.SECRET_KEY)
+        const id = result[0].idteacher
+        const token = jwt.sign(id, SECRET_KEY)
         return res.status(200).send({
           msg: "logged in successfully",
           teacher: result[0],
