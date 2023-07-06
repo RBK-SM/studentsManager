@@ -9,9 +9,24 @@ import Grade from './components/Teachers/Grade/Grade.js'
 const App = () => {
   const [datas, setDatas] = useState([])
   const [grades,setGrades]=useState([])
+  const [refrech,setRefrech]=useState(false)
+  ///fetch data grade///
+  useEffect(() => {
+    fetchGrade()
+  }, [!refrech])
+
+  const fetchGrade=(()=>{
+axios.get("//URL")
+.then((response) => {
+  setGrades(response.data);
+})
+
+.catch((error) => console.log(error));
+})
+///fetch data teacher///
   useEffect(() => {
     fetchData()
-  }, [])
+  }, [!refrech])
 
   const fetchData=(()=>{
 axios.get("//URL")
@@ -26,7 +41,7 @@ axios.get("//URL")
       <AddTeahcers />
       <Teachers data={datas} />
       <AddGrade/>
-      <Grade />
+      <Grade datas={grades}/>
     </div>
   )
 }

@@ -6,7 +6,7 @@ const Grade = (props) => {
     <div>
       {props.data.map((item, i) => (
         <div key={i}>
-          <DetailsGrade customers={item} />
+          <DetailsGrade grade={item} />
         </div>
       ))}
     </div>
