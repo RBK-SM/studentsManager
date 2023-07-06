@@ -8,15 +8,15 @@ const DetailsGrade = (grade) => {
   const changeView = () => {
     setView(!view);
   };
-  const deleteGrade = (name) => {
+  const deleteGrade = (id) => {
     axios
-      .delete(`URL${name}`)
+      .delete(`URL${id}`)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   };
-  const updateGrade = (name) => {
+  const updateGrade = (id) => {
     axios
-      .put(`URL${name}`, {
+      .put(`URL${id}`, {
         subject: subject,
         score: score,
       })

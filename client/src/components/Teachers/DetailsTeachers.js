@@ -11,15 +11,15 @@ const DetailsTeachers = (Name) => {
     setView(!view);
   };
 
-  const deleteTeacher = (name) => {
+  const deleteTeacher = (id) => {
     axios
-      .delete(`URL${name}`)
+      .delete(`URL${id}`)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   };
-  const updateTeacher = (name) => {
+  const updateTeacher = (id) => {
     axios
-      .put(`URL${name}`, {
+      .put(`URL${id}`, {
         teacherName: teacherName,
         email: email,
         password: password,
