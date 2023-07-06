@@ -7,8 +7,8 @@
 const express = require("express");
 const app = express();
 const cors = require('cors')
-const PORT =5000
 
+const PORT =5000
 //Require application Route modules
 const teacherRoute = require('./routes/teacherRoutes');
 const studentsRoute = require('./routes/studentsRoutes');
@@ -22,7 +22,6 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api/SM/teachers', teacherRoute);
 app.use('/api/SM/students', studentsRoute);
 app.use('/api/SM/grades', gradeRoute);
-
 
 app.listen(PORT, function () {
     console.log("listening on port 3000!");
