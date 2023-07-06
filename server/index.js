@@ -11,7 +11,8 @@ const cors = require('cors')
 const PORT =5000
 //Require application Route modules
 const teacherRoute = require('./routes/teacherRoutes');
-// const studentsRoute = require('./routes/studentsRoutes');
+const studentsRoute = require('./routes/studentsRoutes');
+const gradeRoute = require('./routes/gradeRoutes');
 
 app.use(cors())
 app.use(express.json());
@@ -19,7 +20,8 @@ app.use(express.urlencoded({ extended: true }));
 
 //Add Routes to the middleware handling path, specifying the respective URL path
 app.use('/api/SM/teachers', teacherRoute);
-// app.use('/api/SM/students', studentsRoute);
+app.use('/api/SM/students', studentsRoute);
+app.use('/api/SM/grades', gradeRoute);
 
 app.listen(PORT, function () {
     console.log("listening on port 3000!");
