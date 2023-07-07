@@ -1,15 +1,16 @@
 import React from "react";
-import ListItem from "./ListItem.jsx";
+import Students from "./Students.jsx";
 
 const List = (props) => (
   <div>
-    <h4> List Component </h4>
-    There are {props.items.length} items.
-    {props.items.map((item, index) => (
+    <h4>students</h4>
+  <div className="parent">
+    {props.data.map((data, index) => (
       <div key={index}>
-        <ListItem item={item} />
+        <Students data={data} />
       </div>
     ))}
+  </div>
   </div>
 );
 
