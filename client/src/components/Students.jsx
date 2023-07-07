@@ -5,8 +5,9 @@ function Students(props) {
   const [currentView, setCurrentView] = useState('students');
 
 const changeView = (view) => {
-  setCurrentView(view);
-};
+  setCurrentView(view)
+}
+ 
 
 return (
   <div>
