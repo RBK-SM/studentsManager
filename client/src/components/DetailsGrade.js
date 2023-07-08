@@ -2,28 +2,28 @@ import axios from "axios";
 import React, { useState } from "react";
 
 const DetailsGrade = (grade) => {
-    const [view, setView] = useState(false);
-    const [subject, setSubject] = useState("");
-    const [score, setScore] = useState(0);
+  const [view, setView] = useState(false);
+  const [subject, setSubject] = useState("");
+  const [score, setScore] = useState(0);
   const changeView = () => {
     setView(!view);
   };
   const deleteGrade = (id) => {
     axios
-      .delete(`URL${id}`)
+      .delete(`http://localhost:5000/api/SM/grades/${id}`)
       .then((res) => console.log(res.data))
       .catch((err) => console.log(err));
   };
   const updateGrade = (id) => {
     axios
-      .put(`URL${id}`, {
+      .put(`http://localhost:5000/api/SM/grades/${id}`, {
         subject: subject,
         score: score,
       })
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
   };
-  return(
+  return (
     <div className="grade-detail">
       <div>
         <ul>
@@ -51,11 +51,9 @@ const DetailsGrade = (grade) => {
       >
         Update grade
       </button>
-      <button onClick={() => deleteGrade(grade.score)}>
-        Delete Grade
-      </button>
+      <button onClick={() => deleteGrade(grade.score)}>Delete Grade</button>
     </div>
-  )
+  );
 };
 
 export default DetailsGrade;

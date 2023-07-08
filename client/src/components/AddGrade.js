@@ -11,14 +11,14 @@ const AddGrade = () => {
       score: score,
     };
     axios
-      .post("URL", grades)
+      .post("http://localhost:5000/api/SM/", grades)
       .then((response) => console.log(response.data))
       .catch((err) => console.log(err));
   };
   return (
     <div className="create-grade">
       <div>
-        <h2 className="head"> </h2>
+        <h2 className="head"> Add Grade</h2>
       </div>
       <div>
         <input

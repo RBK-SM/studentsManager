@@ -1,30 +1,39 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const DetailsTeachers = (Name) => {
-  const [newTeachersName, setNewTeachersName] = useState();
-  const [newPassword, setNewPassword] = useState("");
-  const [newEmail, setNewEmail] = useState("");
+const DetailsTeachers = ({ data, setRefrech, dataTeacher, setDataTeacher }) => {
+  const [teacher, setTeacher] = useState(data);
   const [view, setView] = useState(false);
 
   const changeView = () => {
     setView(!view);
   };
-
-  const deleteTeacher = (id) => {
+  React.useEffect(() => {
+    console.log({ data });
+  }, []);
+  const deleteTeacher = (idteacher) => {
     axios
-      .delete(`URL${id}`)
-      .then((res) => console.log(res.data))
+
+      .delete(`http://localhost:5000/api/SM/teachers/${idteacher}`)
+      .then((res) => {
+        setDataTeacher(
+          dataTeacher.filter((teacher) => teacher.idteacher != idteacher)
+        );
+        setRefrech(true);
+        console.log(res.data);
+      })
       .catch((err) => console.log(err));
   };
-  const updateTeacher = (id) => {
+  const updateTeacher = () => {
     axios
-      .put(`URL${id}`, {
-        teacherName: teacherName,
-        email: email,
-        password: password,
+      .put(
+        `http://localhost:5000/api/SM/teachers/${teacher.idteacher}`,
+        teacher
+      )
+      .then((response) => {
+        setRefrech(true);
+        console.log(response);
       })
-      .then((response) => console.log(response))
       .catch((error) => console.log(error));
   };
 
@@ -32,38 +41,44 @@ const DetailsTeachers = (Name) => {
     <div className="teacher-detail">
       <div>
         <ul>
-          <li className="detail-name">{Name.teacherName}</li>
+          <li className="detail-name">{data.name}</li>
           <li>
             {view ? (
               <input
                 type="text"
-                value={Name.teacherName}
-                onChange={(e) => setNewTeachersName(e.target.value)}
+                value={teacher.name}
+                onChange={(e) => {
+                  setTeacher({ ...data, name: e.target.value });
+                }}
               />
             ) : (
-              Name.teacherName
+              teacher.name
             )}
           </li>
           <li>
             {view ? (
               <input
                 type="text"
-                value={Name.email}
-                onChange={(e) => setNewEmail(e.target.value)}
+                value={teacher.email}
+                onChange={(e) => {
+                  setTeacher({ ...data, email: e.target.value });
+                }}
               />
             ) : (
-              Name.email
+              teacher.email
             )}
           </li>
           <li>
             {view ? (
               <input
                 type="text"
-                value={Name.password}
-                onChange={(e) => setNewPassword(e.target.value)}
+                value={teacher.password}
+                onChange={(e) => {
+                  setTeacher({ ...data, password: e.target.value });
+                }}
               />
             ) : (
-              Name.password
+              teacher.password
             )}
           </li>
         </ul>
@@ -71,7 +86,7 @@ const DetailsTeachers = (Name) => {
       {view ? (
         <button
           onClick={() => {
-            updateTeacher(Name.teacherName.email.password);
+            updateTeacher();
           }}
         >
           Update Teacher
@@ -80,7 +95,7 @@ const DetailsTeachers = (Name) => {
         <button onClick={changeView}>Edit Teacher</button>
       )}
 
-      <button onClick={() => deleteTeacher(Name.teacherName)}>
+      <button onClick={() => deleteTeacher(teacher.idteacher)}>
         Delete Teacher
       </button>
     </div>

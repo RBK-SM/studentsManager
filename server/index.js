@@ -24,6 +24,6 @@ app.use('/api/SM/students', studentsRoute);
 app.use('/api/SM/grades', gradeRoute);
 
 app.listen(PORT, function () {
-    console.log("listening on port 3000!");
+    console.log("listening on port 5000!");
   });
   

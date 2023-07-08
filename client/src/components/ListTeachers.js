@@ -1,17 +1,25 @@
 import React from "react";
-import DetailsTeachers from "./DetailsTeachers";
+import Teachers from "./Teachers";
 
-const Teachers = (props) => {
+const ListTeachers = (props) => {
+  React.useEffect(() => {
+    console.log({ props });
+  }, []);
   return (
     <div>
-      <h4>Teachers</h4>
+      <h4 className="teacher">Teachers</h4>
       {props.data.map((item, i) => (
         <div key={i}>
-          <DetailsTeachers Name={item} />
+          <Teachers
+            data={item}
+            setRefrech={props.setRefrech}
+            setDataTeacher={props.setDataTeacher}
+            dataTeacher={props.dataTeacher}
+          />
         </div>
       ))}
     </div>
   );
 };
 
-export default Teachers;
+export default ListTeachers;
