@@ -9,7 +9,7 @@ const App = () => {
   const [currentView, setCurrentView] = useState('students')
   useEffect(() => {
     $.ajax({
-      url: '/data.json',
+      url: 'http://localhost:3000/api/SM/students/',
       success: (data) => {
         console.log(data)
         setData(data)
