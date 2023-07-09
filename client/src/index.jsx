@@ -9,7 +9,7 @@ const App = () => {
   const [currentView, setCurrentView] = useState('students')
   useEffect(() => {
     $.ajax({
-      url: 'http://localhost:3000/api/SM/students/',
+      url: 'http://localhost:5000/api/SM/students/',
       success: (data) => {
         console.log(data)
         setData(data)
@@ -25,29 +25,28 @@ const App = () => {
   }
 
   let content
-  if (currentView === 'about') {
-    content = <AboutUs />
-  } else if (currentView === 'teachers') {
+  if (currentView === 'teachers') {
     content = <Teachers />
   } else if (currentView === 'students') {
     content = <List data={data} />
   } else if (currentView === 'grades') {
     content = <Grades />
-  } else if (currentView === 'contact') {
-    content = <ContactUs />
-  } else {
+
+    
+  }else if (currentView === 'about') {
+    content = <AboutUs />
+    
+  }else {
     content = <List items={items} />
   }
 
   return (
     <div>
     <header className='header'>
-      <img className='logo' src="	https://dreamslms-wp.dreamguystech.com/wp-content/themes/dreamslms/assets/images/logo.svg" alt="Logo" width="180" />
+      <img className='logo' src="logo.png" alt="Logo" width="180" />
       <nav className='nav'>
         <ul className='list'>
-          <div className='list-item'>
-            <button onClick={() => changeView('about')}>About Us</button>
-          </div>
+          
           <div className='list-item'>
             <button onClick={() => changeView('teachers')}>Teachers</button>
           </div>
@@ -57,8 +56,9 @@ const App = () => {
           <div className='list-item'>
             <button onClick={() => changeView('grades')}>Grades</button>
           </div>
+       
           <div className='list-item'>
-            <button onClick={() => changeView('contact')}>Contact Us</button>
+            <button onClick={() => changeView('about')}>About Us</button>
           </div>
         </ul>
       </nav>

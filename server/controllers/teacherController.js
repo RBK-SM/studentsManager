@@ -26,15 +26,15 @@ module.exports = {
     });
   },
 
-  insertTeacher: function (req, res) {
-    db.query("insert into teachers (name,email,password) values(?,?,?)", [req.body.name, req.body.email, req.body.password], (err, items, fields) => {
-      if (err) {
-        res.status(500).send(err);
-      } else {
-        res.status(200).send(items);
-      }
-    });
-  },
+  // insertTeacher: function (req, res) {
+  //   db.query("insert into teachers (name,email,password) values(?,?,?)", [req.body.name, req.body.email, req.body.password], (err, items, fields) => {
+  //     if (err) {
+  //       res.status(500).send(err);
+  //     } else {
+  //       res.status(200).send(items);
+  //     }
+  //   });
+  // },
   updateTeacher: function (req, res) {
     db.query('update teachers set name =? , email=? , password=? where idteacher =?', [req.body.name, req.body.email, req.body.password, req.params.idteacher], (err, items, fields) => {
       if (err) {

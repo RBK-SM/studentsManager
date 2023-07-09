@@ -3,7 +3,10 @@ import Students from "./Students.jsx";
 
 const List = (props) => (
   <div>
-    <h4>students</h4>
+    <div className="title">
+    <img className="title" src="student.png"/>
+    </div>
+   
   <div className="parent">
     {props.data.map((data, index) => (
       <div key={index}>

@@ -13,17 +13,17 @@ function StudentsInfo(props) {
 
   const handleUpdate = () => {
     const updated = {
-      id: props.data1.id,
+      idstudents: props.data1.idstudents,
       name:props.data1.name,
       gender:props.data1.gender,
       phone:props.data1.phone,
       email:props.data1.email,
       attendance:props.data1.attendance,
       image:props.data1.image,
-      teachers_idteacher: teachersId
+      // teachers_idteacher: teachersId
     };
 
-    axios.put(`http://localhost:3000/api/SM/students/${props.data1.id}`, updated)
+    axios.put(`http://localhost:5000/api/SM/students/${props.data1.id}/${props.data1.teachers_idteacher}`, updated)
       .then((res) => {
         console.log(res)
         setUpdate(false)
@@ -34,7 +34,8 @@ function StudentsInfo(props) {
   }
 
   const handleDelete = () => {
-    axios.delete(`http://localhost:3000/api/SM/students/${props.data1.id}`)
+
+    axios.delete(`http://localhost:5000/api/SM/students/${props.data1.idstudents}`)
       .then((res) => {
         console.log(res)
       })
@@ -50,15 +51,15 @@ function StudentsInfo(props) {
   return (
     <div className="card1">
       <center>
-        {isEditing ? (
+        {update ? (
           <div>
-            <input type="text" value={data1.name} onChange={(e)=>setName(e.target.value)} />
-            <input type="text" value={data1.gender} onChange={(e)=>setGender(e.target.value)} />
-            <input type="text" value={data1.phone} onChange={(e)=>setPhone(e.target.value)} />
-            <input type="text" value={data1.email} onChange={(e)=>setEmail(e.target.value)} />
-            <input type="text" value={data1.attendance} onChange={(e)=>setAttendance(e.target.value)} />
-            <input type="text" value={data1.image} onChange={(e)=>setImage(e.target.value)} />
-            <input type="text" value={data1.teachersId} onChange={(e)=>setTeachersId(e.target.value)} />
+            <input type="text" value={props.data1.name} onChange={(e)=>setName(e.target.value)} />
+            <input type="text" value={props.data1.gender} onChange={(e)=>setGender(e.target.value)} />
+            <input type="text" value={props.data1.phone} onChange={(e)=>setPhone(e.target.value)} />
+            <input type="text" value={props.data1.email} onChange={(e)=>setEmail(e.target.value)} />
+            <input type="text" value={props.data1.attendance} onChange={(e)=>setAttendance(e.target.value)} />
+            <input type="text" value={props.data1.image} onChange={(e)=>setImage(e.target.value)} />
+            {/* <input type="text" value={props.data1.teachersId} onChange={(e)=>setTeachersId(e.target.value)} /> */}
             <button onClick={handleUpdate}>Update</button>
           </div>
         ) : (
