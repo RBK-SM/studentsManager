@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom'
 import $, { data } from 'jquery'
 import List from './components/List.jsx'
 import AboutUs from './components/AboutUs.jsx'
-
+import Contact from './components/Contact.jsx'
 const App = () => {
   const [data, setData] = useState([])
-  const [currentView, setCurrentView] = useState('students')
+  const [currentView, setCurrentView] = useState('about us')
   useEffect(() => {
     $.ajax({
-      url: 'http://localhost:3000/api/SM/students/',
+      url: 'http://localhost:5000/api/SM/students/',
       success: (data) => {
         console.log(data)
         setData(data)
@@ -25,7 +25,7 @@ const App = () => {
   }
 
   let content
-  if (currentView === 'about') {
+   if (currentView === 'about') {
     content = <AboutUs />
   } else if (currentView === 'teachers') {
     content = <Teachers />
@@ -34,9 +34,9 @@ const App = () => {
   } else if (currentView === 'grades') {
     content = <Grades />
   } else if (currentView === 'contact') {
-    content = <ContactUs />
+    content = <Contact />
   } else {
-    content = <List items={items} />
+    content = <List data={data} />
   }
 
   return (
