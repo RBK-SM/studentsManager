@@ -3,7 +3,7 @@ const router = express.Router();
 const verifyToken=require("../middleware/verify.js");
 
 
-const {getAllTeachers,insertTeacher,updateTeacher, deleteTeacher,registerTeacher,loginTeacher} = require('../controllers/teacherController');
+const {getAllTeachers,getOneTeachers,insertTeacher,updateTeacher, deleteTeacher,registerTeacher,loginTeacher} = require('../controllers/teacherController');
 
 
 router.get('/', getAllTeachers);
