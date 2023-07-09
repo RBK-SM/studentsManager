@@ -4,14 +4,12 @@ function TeachersInfo(props) {
   return (
     <div className="card1">
       <center>
-        <p>Gender:{props.data1.gender}</p>
-        <p>Phone:{props.data1.phone}</p>
         <p>
           Email:
           <br />
-          {props.data1.email}
+          {props.data.email}
         </p>
-        <p>Attendance: {props.data1.attendance_counter}</p>
+        <p>password: {props.data.password}</p>
         <div>
           <button className="btn2">Update info</button>
           <button className="btn2">Delete Info</button>

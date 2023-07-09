@@ -11,7 +11,7 @@ const AddGrade = () => {
       score: score,
     };
     axios
-      .post("http://localhost:5000/api/SM/", grades)
+      .post("http://localhost:5000/api/SM/grades/", grades)
       .then((response) => console.log(response.data))
       .catch((err) => console.log(err));
   };

@@ -1,40 +1,48 @@
 import axios from "axios";
 import React, { useState } from "react";
 
-const DetailsGrade = (grade) => {
+const DetailsGrade = (data, setRefrech, dataGrade, setDataGrade) => {
   const [view, setView] = useState(false);
-  const [subject, setSubject] = useState("");
-  const [score, setScore] = useState(0);
+  const [grade, setGrade] = useState(data);
+  //const [score, setScore] = useState(0);
+
   const changeView = () => {
     setView(!view);
   };
-  const deleteGrade = (id) => {
+
+  const deleteGrade = (idgrades) => {
     axios
-      .delete(`http://localhost:5000/api/SM/grades/${id}`)
-      .then((res) => console.log(res.data))
+      .delete(`http://localhost:5000/api/SM/grades/${idgrades}`)
+      .then((res) => {
+        setDataGrade(dataGrade.filter((grade) => grade.idgrades != idgrades));
+        setRefrech(true);
+        console.log(res.data);
+      })
       .catch((err) => console.log(err));
   };
-  const updateGrade = (id) => {
+
+  const updateGrade = () => {
     axios
-      .put(`http://localhost:5000/api/SM/grades/${id}`, {
-        subject: subject,
-        score: score,
+      .put(`http://localhost:5000/api/SM/grades/${grade.idgrades}`)
+      .then((response) => {
+        setRefrech(true);
+        console.log(response);
       })
-      .then((response) => console.log(response))
       .catch((error) => console.log(error));
   };
   return (
     <div className="grade-detail">
       <div>
         <ul>
-          <li className="grade-name">{grade.score}</li>
+          <li className="grade-name">{grade.subject}</li>
           <li>
             {view ? (
               <input
-                defaultValue={grade.subject}
+                type="text"
+                Value={grade.subject}
                 onChange={(e) => {
                   console.log(subject);
-                  setSubject(e.target.value);
+                  setGrade({ ...data, subject: e.target.value });
                 }}
               />
             ) : (
@@ -43,15 +51,19 @@ const DetailsGrade = (grade) => {
           </li>
         </ul>
       </div>
-      <button onClick={changeView}>Edit Grade subject</button>
-      <button
-        onClick={() => {
-          updateGrade(grade.score);
-        }}
-      >
-        Update grade
-      </button>
-      <button onClick={() => deleteGrade(grade.score)}>Delete Grade</button>
+      {view ? (
+        <button
+          onClick={() => {
+            updateGrade();
+          }}
+        >
+          Update Grade
+        </button>
+      ) : (
+        <button onClick={changeView}>Edit Grade</button>
+      )}
+
+      <button onClick={() => deleteGrade(grade.idgrades)}>Delete Grade</button>
     </div>
   );
 };

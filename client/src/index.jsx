@@ -3,14 +3,14 @@ import ReactDOM from "react-dom";
 import List from "./components/ListStudents.jsx";
 import AboutUs from "./components/AboutUs.jsx";
 import axios from "axios";
-import Grade from "./components/Grade.js";
+import ListGrade from "./components/ListGrade.js";
 import $, { data } from "jquery";
 import ListTeachers from "./components/ListTeachers.js";
 
 const App = () => {
   const [dataStudent, setDataStudent] = useState([]);
   const [currentView, setCurrentView] = useState("students");
-  const [grades, setGrades] = useState([]);
+  const [dataGrade, setDataGrade] = useState([]);
   const [dataTeacher, setDataTeacher] = useState([]);
   const [refrech, setRefrech] = useState(false);
 
@@ -29,9 +29,9 @@ const App = () => {
   ///fetch data grade///
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/SM/teachers/")
+      .get("http://localhost:5000/api/SM/grades/")
       .then((response) => {
-        setGrades(response.data);
+        setDataGrade(response.data);
       })
       .catch((error) => {
         console.log(error);
@@ -65,7 +65,7 @@ const App = () => {
   } else if (currentView === "students") {
     content = <List data={dataStudent} />;
   } else if (currentView === "grades") {
-    content = <Grade data={grades} />;
+    content = <ListGrade data={dataGrade} />;
   } else if (currentView === "contact") {
     content = <ContactUs />;
   } else {
