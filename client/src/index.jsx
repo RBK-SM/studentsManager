@@ -33,8 +33,6 @@ const App = () => {
     content = <List data={data} />
   } else if (currentView === 'grades') {
     content = <Grades />
-  } else if (currentView === 'contact') {
-    content = <Contact />
   } else {
     content = <List data={data} />
   }
