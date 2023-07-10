@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `studentmanager`.`teachers` (
   `password` VARCHAR(300) NOT NULL,
   PRIMARY KEY (`idteacher`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb3;
 
 
@@ -41,13 +41,10 @@ CREATE TABLE IF NOT EXISTS `studentmanager`.`students` (
   `attendance` VARCHAR(45) NOT NULL,
   `image` VARCHAR(500) NOT NULL,
   `teachers_idteacher` INT NOT NULL,
-  PRIMARY KEY (`idstudents`),
-  INDEX `fk_Stundents_teachers1_idx` (`teachers_idteacher` ASC) VISIBLE,
-  CONSTRAINT `fk_Stundents_teachers1`
-    FOREIGN KEY (`teachers_idteacher`)
-    REFERENCES `studentmanager`.`teachers` (`idteacher`))
+  PRIMARY KEY (`idstudents`))
+  
 ENGINE = InnoDB
-AUTO_INCREMENT = 7
+AUTO_INCREMENT = 1
 DEFAULT CHARACTER SET = utf8mb3;
 
 

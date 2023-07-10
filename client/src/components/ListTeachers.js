@@ -1,13 +1,18 @@
 import React from "react";
-import Teachers from "./Teachers";
+import Teachers from "./Teachers.js";
+
 
 const ListTeachers = (props) => {
   React.useEffect(() => {
     console.log({ props });
   }, []);
   return (
-    <div>
-      <h4 className="teacher">Teachers</h4>
+    <div className="parent">
+     
+       <center><div>
+       
+      <h4 >Teachers</h4>
+      </div></center>
       {props.data.map((item, i) => (
         <div key={i}>
           <Teachers
@@ -16,6 +21,7 @@ const ListTeachers = (props) => {
             setDataTeacher={props.setDataTeacher}
             dataTeacher={props.dataTeacher}
           />
+         
         </div>
       ))}
     </div>

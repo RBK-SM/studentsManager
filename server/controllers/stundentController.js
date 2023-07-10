@@ -21,16 +21,16 @@ module.exports = {
         });
       },
     insertStudents: function(req, res) {
-        db.query("insert into students set name=? ,gender=? ,phone=? ,email=? ,attendance=? ,image=? ,teachers_idteacher=?",[req.body.name,req.body.gender,req.body.phone,req.body.email,req.body.attendance,req.body.image,req.params.teachers_idteacher], (err, items, fields) => {
+        db.query("insert into students set name=? ,gender=? ,phone=? ,email=? ,attendance=? ,image=? ",[req.body.name,req.body.gender,req.body.phone,req.body.email,req.body.attendance,req.body.image], (err, students, fields) => {
             if (err) {
               res.status(500).send(err);
             } else {
-              res.status(200).send(items);
+              res.status(200).send(students);
             }
           });
     },
     updateStudents: function(req, res) {
-        db.query('update students set name=?,gender=?,phone=?,email=?,attendance=?,image=?,teachers_idteacher=? where idstudents =?',[req.body.name,req.body.gender,req.body.phone,req.body.email,req.body.attendance,req.body.image,req.params.teachers_idteacher,req.params.idstudents], (err, items, fields) => {
+        db.query('update students set name=?,gender=?,phone=?,email=?,attendance=?,image=? where idstudents =?',[req.body.name,req.body.gender,req.body.phone,req.body.email,req.body.attendance,req.body.image,req.params.idstudents], (err, items, fields) => {
             if (err) {
               res.status(500).send(err);
             } else {

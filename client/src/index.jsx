@@ -63,9 +63,11 @@ const App = () => {
     );
   } else if (currentView === "students") {
     content = <List data={data} />;
-  } else if (currentView === "grades") {
-    content = <ListGrade data={dataGrade} />;
-  } else if (currentView === "about") {
+  } 
+  // else if (currentView === "grades") {
+  //   content = <ListGrade data={dataGrade} />;
+  // } 
+  else if (currentView === "about") {
     content = <AboutUs />;
   } else {
     content = <List items={items} />;
@@ -83,9 +85,9 @@ const App = () => {
             <div className="list-item">
               <button onClick={() => changeView("students")}>Students</button>
             </div>
-            <div className="list-item">
+            {/* <div className="list-item">
               <button onClick={() => changeView("grades")}>Grades</button>
-            </div>
+            </div> */}
 
             <div className="list-item">
               <button onClick={() => changeView("about")}>About Us</button>

@@ -2,40 +2,27 @@ import React, { useState } from 'react';
 import axios from 'axios';
 
 function StudentsInfo(props) {
+  console.log(props.data1,"props");
   const [update, setUpdate] = useState(false)
-  const [name, setName] = useState(props.data1.name)
-  const [gender, setGender] = useState(props.data1.gender)
-  const [phone, setPhone] = useState(props.data1.phone)
-  const [email, setEmail] = useState(props.data1.email)
-  const [attendance, setAttendance] = useState(props.data1.attendance)
-  const [image, setImage] = useState(props.data1.image)
-  const [teachersId, setTeachersId] = useState(props.data1.teachers_idteacher)
+  const [name,setName]=useState('')
+  const [gender,setGender]=useState('')
+  const [email,setEmail]=useState('')
+  const [phone,setPhone]=useState('')
+  const [attendance,setAttendance]=useState('')
+  const [image,setImage]=useState('')
 
-  const handleUpdate = () => {
-    const updated = {
-      idstudents: props.data1.idstudents,
-      name:props.data1.name,
-      gender:props.data1.gender,
-      phone:props.data1.phone,
-      email:props.data1.email,
-      attendance:props.data1.attendance,
-      image:props.data1.image,
-      // teachers_idteacher: teachersId
-    };
-
-    axios.put(`http://localhost:5000/api/SM/students/${props.data1.id}/${props.data1.teachers_idteacher}`, updated)
+  const handleUpdate = (idstudents,name,gender,phone,email,attendance,image) => {
+    axios.put(`http://localhost:5000/api/SM/students/${idstudents}`,{name,gender,phone,email,attendance,image})
       .then((res) => {
         console.log(res)
-        setUpdate(false)
       })
       .catch((err) => {
         console.log(err)
       })
   }
 
-  const handleDelete = () => {
-
-    axios.delete(`http://localhost:5000/api/SM/students/${props.data1.idstudents}`)
+  const handleDelete = (idstudents) => {
+    axios.delete(`http://localhost:5000/api/SM/students/${idstudents}`)
       .then((res) => {
         console.log(res)
       })
@@ -53,14 +40,13 @@ function StudentsInfo(props) {
       <center>
         {update ? (
           <div>
-            <input type="text" value={props.data1.name} onChange={(e)=>setName(e.target.value)} />
-            <input type="text" value={props.data1.gender} onChange={(e)=>setGender(e.target.value)} />
-            <input type="text" value={props.data1.phone} onChange={(e)=>setPhone(e.target.value)} />
-            <input type="text" value={props.data1.email} onChange={(e)=>setEmail(e.target.value)} />
-            <input type="text" value={props.data1.attendance} onChange={(e)=>setAttendance(e.target.value)} />
-            <input type="text" value={props.data1.image} onChange={(e)=>setImage(e.target.value)} />
-            {/* <input type="text" value={props.data1.teachersId} onChange={(e)=>setTeachersId(e.target.value)} /> */}
-            <button onClick={handleUpdate}>Update</button>
+            <input  value={name} onChange={(e)=>{setName(e.target.value)}} />
+            <input  value={gender} onChange={(e)=>{setGender(e.target.value)}} />
+            <input  value={email} onChange={(e)=>{setEmail(e.target.value)}} />
+            <input  value={phone} onChange={(e)=>{setPhone(e.target.value)}} />
+            <input  value={attendance} onChange={(e)=>{setAttendance(e.target.value)}} />
+            <input  value={image} onChange={(e)=>{setImage(e.target.value)}} />
+            <button onClick={()=>{handleUpdate(props.data1.idstudents,name,gender,phone,email,attendance,image),console.log(props.data1.idstudents,name,gender,phone,email,attendance,image);}} type="submit">Update</button>
           </div>
         ) : (
           <div>
@@ -69,8 +55,8 @@ function StudentsInfo(props) {
             <p>Email: <br />{props.data1.email}</p>
             <p>Attendance: {props.data1.attendance}</p>
             <div>
-              <button className="btn2" onClick={handleUp}>Update info</button>
-              <button className="btn2" onClick={handleDelete}>Delete Info</button>
+              <button className="btn2" onClick={()=>{handleUp()}}>Update info</button>
+              <button className="btn2" onClick={()=>handleDelete(props.data1.idstudents)}>Delete Info</button>
             </div>
           </div>
         )}

@@ -1,12 +1,17 @@
 import React from "react";
 import Students from "./Students.jsx";
 
-const List = (props) => (
+const List = (props) => {
+
+return(
   <div>
     <div className="title">
     <img className="title" src="student.png"/>
     </div>
-   
+
+
+    
+
   <div className="parent">
     {props.data.map((data, index) => (
       <div key={index}>
@@ -15,6 +20,7 @@ const List = (props) => (
     ))}
   </div>
   </div>
-);
+)
+};
 
 export default List;

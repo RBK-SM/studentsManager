@@ -2,21 +2,25 @@ import React, { useState } from 'react';
 import StudentsInfo from './StudentsInfo.jsx';
 
 function Students(props) {
-  const [currentView, setCurrentView] = useState('students');
+  const [details, setDetails] = useState(false);
 
-const changeView = (view) => {
-  setCurrentView(view)
+const handleDetails = () =>{
+     setDetails(true)
+}
+
+const handleLess =() =>{
+  setDetails(false)
 }
  
-
+if (details) {
 return (
-  <div>
-    {currentView === 'studentsInfo' ? (
       <div>
         <StudentsInfo data1={props.data} />
-        <button className="btn1" onClick={() => changeView('students')}>Less Info</button>
+        <button className="btn1" onClick={handleLess}>Less Info</button>
       </div>
-    ) : (
+    )
+}
+return (
       <div className="card">
         <div className="card-item">
           <div className="img">
@@ -26,11 +30,9 @@ return (
             <span>{props.data.name}</span>
           </center>
           <p className="job">student</p>
-          <button  onClick={() => changeView('studentsInfo')}>More Info</button>
+          <button  onClick={handleDetails}>More Info</button>
         </div>
       </div>
-    )}
-  </div>
-);
+)
     }
       export default Students;

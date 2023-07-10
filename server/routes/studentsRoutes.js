@@ -5,8 +5,8 @@ const { getAllStudents,getOneStudents,insertStudents,updateStudents, deleteStude
 
 router.get('/', getAllStudents);
 router.get('/:name', getOneStudents);
-router.post('/insert/:teachers_idteacher', insertStudents);
-router.put('/:idstudents/:teachers_idteacher', updateStudents);
+router.post('/insert', insertStudents);
+router.put('/:idstudents', updateStudents);
 router.delete('/:idstudents', deleteStudents);
 
 
